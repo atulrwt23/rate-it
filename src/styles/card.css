@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.card {
+    border: 1px solid black;
+    display: block;
+    color: black;
+    border-radius: 12px;
+    height: 6rem;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    align-content: center;
+}
+
+button {
+    width: 8rem;
+    height: 2rem;
+    border: 0.4rem solid white;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+}

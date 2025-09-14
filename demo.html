@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Series Tracker - Demo</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        /* Include the CSS from App.css */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        /* Demo-specific styles */
+        .demo-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        
+        .demo-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .demo-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .demo-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        .view-switcher {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5a6fd8;
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+        
+        .demo-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .demo-explanation {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .demo-explanation h2 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .demo-explanation p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .demo-explanation ul {
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #555;
+        }
+        
+        .demo-explanation li {
+            margin-bottom: 0.5rem;
+            padding-left: 0.5rem;
+        }
+        
+        .setup-instructions {
+            background: #e3f2fd;
+            border: 1px solid #bbdefb;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .setup-instructions h3 {
+            color: #1565c0;
+            margin-bottom: 1rem;
+        }
+        
+        .setup-instructions code {
+            background: #f5f5f5;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .feature-card ul {
+            margin-left: 1rem;
+        }
+        
+        .feature-card li {
+            color: #555;
+            margin-bottom: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const DemoLandingPage = () => {
+            return (
+                <div className="demo-container">
+                    <div className="demo-header">
+                        <h1>🚀 React Series Tracker - Demo</h1>
+                        <p>Interactive demonstration of all features described in README.md</p>
+                        <div className="view-switcher">
+                            <button className="btn btn-primary" onClick={() => window.location.href = 'http://localhost:3000'}>
+                                🎯 Launch Live Demo
+                            </button>
+                            <button className="btn btn-secondary" onClick={() => alert('Check the src/Demo.js file for the complete component')}>
+                                📄 View Source Code
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div className="demo-content">
+                        <div className="demo-explanation">
+                            <h2>What This Demo Showcases</h2>
+                            <p>
+                                This demo is a comprehensive implementation of the React Series Tracker described in the README.md file. 
+                                It demonstrates all the key concepts and features in an interactive, working application.
+                            </p>
+                            
+                            <div className="feature-grid">
+                                <div className="feature-card">
+                                    <h3>🔧 Technical Features</h3>
+                                    <ul>
+                                        <li>React Context API for state management</li>
+                                        <li>React Router for navigation</li>
+                                        <li>Mock APIs with realistic delays</li>
+                                        <li>CRUD operations (Create, Read, Update, Delete)</li>
+                                        <li>Nested API calls on details page</li>
+                                        <li>Loading states and error handling</li>
+                                    </ul>
+                                </div>
+                                
+                                <div className="feature-card">
+                                    <h3>🎨 UI/UX Features</h3>
+                                    <ul>
+                                        <li>Star rating system (1-5 stars)</li>
+                                        <li>Progress bars with percentage tracking</li>
+                                        <li>Modal forms for create/edit operations</li>
+                                        <li>Loading spinners during API calls</li>
+                                        <li>Responsive design with CSS Grid</li>
+                                        <li>Confirmation dialogs for destructive actions</li>
+                                    </ul>
+                                </div>
+                                
+                                <div className="feature-card">
+                                    <h3>📚 Learning Concepts</h3>
+                                    <ul>
+                                        <li>React Hooks (useState, useEffect, useContext)</li>
+                                        <li>Component architecture patterns</li>
+                                        <li>Async programming with promises</li>
+                                        <li>Form handling and validation</li>
+                                        <li>Route-based component rendering</li>
+                                        <li>Modern CSS techniques</li>
+                                    </ul>
+                                </div>
+                                
+                                <div className="feature-card">
+                                    <h3>🚀 Demo Pages</h3>
+                                    <ul>
+                                        <li><strong>Home Page:</strong> Series list with CRUD operations</li>
+                                        <li><strong>Details Page:</strong> Individual series with nested API calls</li>
+                                        <li><strong>Modal Forms:</strong> Create and edit series</li>
+                                        <li><strong>Loading States:</strong> Realistic API delays (1-3 seconds)</li>
+                                        <li><strong>Error Handling:</strong> User-friendly error messages</li>
+                                        <li><strong>Responsive Design:</strong> Works on all screen sizes</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div className="setup-instructions">
+                                <h3>🛠️ How to Run the Full Demo</h3>
+                                <p>To experience the complete interactive demo:</p>
+                                <ol>
+                                    <li>Run <code>npm start</code> in your terminal</li>
+                                    <li>Import the Demo component: <code>import Demo from './Demo';</code></li>
+                                    <li>Replace your App component with <code>&lt;Demo /&gt;</code></li>
+                                    <li>Visit <code>http://localhost:3000</code> to see the live demo</li>
+                                </ol>
+                                <p><strong>Note:</strong> The Demo.js file is excluded from git commits as requested.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+        
+        ReactDOM.render(<DemoLandingPage />, document.getElementById('root'));
+    </script>
+</body>
+</html>
