@@ -10,11 +10,17 @@ export function Main() {
     const [view, setView] = useState(false);
     const onSubmit = (item) => {
         setReviewPage(false);
-        const newReview = {...item, id:item.id};
+        const newReview = {...item, id: item.id};
         setSeries([...series, newReview])
     }
 
-    const [defaultValues, setDefaultValues] = useState({name:"", description:"", rating:1, id:null ,onSubmit: onSubmit});
+    const [defaultValues, setDefaultValues] = useState({
+        name: "",
+        description: "",
+        rating: 1,
+        id: null,
+        onSubmit: onSubmit
+    });
 
     const onClick = () => {
         setReviewPage(true);
@@ -23,7 +29,7 @@ export function Main() {
     const onEdit = ({name, description, id, rating}) => (e) => {
         setReviewPage(true);
         setView(false);
-        setDefaultValues({name, description, id, rating, onSubmit:editReview});
+        setDefaultValues({name, description, id, rating, onSubmit: editReview});
     }
 
     const editReview = ({name, rating, description, id}) => {
@@ -36,14 +42,14 @@ export function Main() {
 
         setSeries(newSeries);
         setReviewPage(false);
-        setDefaultValues({name:"", description:"", rating:1, id:null ,onSubmit: onSubmit});
+        setDefaultValues({name: "", description: "", rating: 1, id: null, onSubmit: onSubmit});
     }
 
     const onDelete = (id) => {
         const newSeries = series.filter((review) => review.id !== id);
         setSeries(newSeries);
         setReviewPage(false);
-        setDefaultValues({name:"", description:"", rating:1, id:null ,onSubmit: onSubmit});
+        setDefaultValues({name: "", description: "", rating: 1, id: null, onSubmit: onSubmit});
         setView(false);
     }
 
@@ -51,21 +57,24 @@ export function Main() {
         setView(true);
         setReviewPage(false);
         const {name, rating, description} = series.find((review) => review.id === id);
-        setDefaultValues({name, description, rating, id,onSubmit: onSubmit});
+        setDefaultValues({name, description, rating, id, onSubmit: onSubmit});
     }
 
-    return <>
-        {!view && openReviewPage && <ReviewPage defaultValues={defaultValues}/>}
+    if (view) {
+        return <ViewCard onEdit={onEdit(defaultValues)} onDelete={() => onDelete(defaultValues.id)} {...defaultValues}/>
+    }
 
-        {!view && !openReviewPage && <button onClick={onClick}>Add New Review</button>}
-        {!view && !openReviewPage && series.map(item => {
-                return <Card key={item.id} {...item}
-                             onEdit={onEdit(item)}
-                             onDelete={() => onDelete(item.id)}
-                             onView={() => onView(item.id)}
-                />
-        }
-        )
-        }{view && <ViewCard onEdit={onEdit(defaultValues)} onDelete={() => onDelete(defaultValues.id)} {...defaultValues}/>}
-    </>;
+
+    return openReviewPage ? <ReviewPage defaultValues={defaultValues}/> : (
+        <>
+            <button onClick={onClick}>Add New Review</button>
+            {series.map(item =>
+            <Card key={item.id} {...item}
+                  onEdit={onEdit(item)}
+                  onDelete={() => onDelete(item.id)}
+                  onView={() => onView(item.id)}
+            />
+            )}
+        </>
+    )
 }
