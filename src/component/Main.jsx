@@ -64,7 +64,6 @@ export function Main() {
         return <ViewCard onEdit={onEdit(defaultValues)} onDelete={() => onDelete(defaultValues.id)} {...defaultValues}/>
     }
 
-
     return openReviewPage ? <ReviewPage defaultValues={defaultValues}/> : (
         <>
             <button onClick={onClick}>Add New Review</button>
